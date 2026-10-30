@@ -8,6 +8,8 @@ créer un petit écran Compose représentant une fiche « Profil développeur »
 de produire une interface propre, structurée, lisible et composée de plusieurs composants
 réutilisables.
 
+---
+
 ### Sujet 
 
 Votre écran devra contenir au minimum :
@@ -24,7 +26,9 @@ Votre écran devra contenir au minimum :
 
 • au moins une action utilisateur sous forme de bouton ou de zone cliquable.
 
--- travail demandé
+---
+
+### travail demandé
 
 Créer une application Android Compose simple contenant un écran principal de profil
 développeur.
@@ -47,9 +51,13 @@ Créer au minimum 5 fonctions composables, par exemple :
 Les noms sont donnés à titre indicatif. Vous pouvez choisir vos propres noms, à condition qu’ils
 soient clairs.
 
+---
+
 ### Temps
 
 Ce devoir est à réalisé en 1h30.
+
+---
 
 ### Livrables attendus
 
@@ -62,12 +70,30 @@ Le dépôt doit contenir :
 4. Au moins deux previews fonctionnelles.
 5. Une courte réponse écrite dans le README.md.
 
+---
+
 ## Titre : Profil développeur Compose
+
+
+
+---
 
 ### Description
 
+
+
+---
+
 ### Notions utilisées
 
+
+
+---
+
 ### Explications
+
+
+
+---
 
 ### ScreenShot de la preview de l'application
