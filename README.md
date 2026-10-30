@@ -74,10 +74,6 @@ Le dépôt doit contenir :
 
 ## Titre : Profil développeur Compose
 
-
-
----
-
 ### Description
 
 
