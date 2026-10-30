@@ -88,7 +88,41 @@ Le dépôt doit contenir :
 
 ### Explications
 
+1. Quels composables avez-vous créés ?
 
+- ProfileCard
+- ProfileHeader
+- ProfileName
+- ProfileTitle
+- ProfileSkills
+- ProfileButtonContact
+- ProfileContent
+- DeveloperFullstackPreview
+- DeveloperFrontPreview
+
+2. Quel composable représente l’écran principal ?
+
+- ProfileCard
+
+3. Où utilisez-vous un padding externe ?
+
+- ProfileCard
+
+4. Où utilisez-vous un padding interne ?
+
+- ProfileContent
+
+5. Quel composant reçoit un callback ?
+
+- ProfileButtonContact
+
+6. Quelle information d’accessibilité avez-vous ajoutée ?
+
+- un role est une description
+
+7. Pourquoi vos composants peuvent-ils être considérés comme réutilisables ?
+
+- grace aux paramètre transmit des enfant vers le parent
 
 ---
 
