@@ -1,61 +1,14 @@
-# Devoir - Créer une fiche « Profil développeur » avec Compose
+# Devoir - CC2 Jetpack Compose : Amélioration UI de l’application « Profil développeur »
 
-## Contexte
+### Description
 
-### Objectif
-
-créer un petit écran Compose représentant une fiche « Profil développeur ». L’objectif est
-de produire une interface propre, structurée, lisible et composée de plusieurs composants
-réutilisables.
-
----
-
-### Sujet 
-
-Votre écran devra contenir au minimum :
-
-• un nom ;
-
-• un rôle ou titre professionnel ;
-
-• une courte description ;
-
-• une liste de compétences ;
-
-• une information de contact ou de disponibilité ;
-
-• au moins une action utilisateur sous forme de bouton ou de zone cliquable.
-
----
-
-### travail demandé
-
-Créer une application Android Compose simple contenant un écran principal de profil
-développeur.
-
-Le code doit être organisé en plusieurs composables.
-Créer au minimum 5 fonctions composables, par exemple :
-
-• un composable pour l’écran principal ;
-
-• un composable pour la fiche de profil ;
-
-• un composable pour l’en-tête du profil ;
-
-• un composable pour une compétence ;
-
-• un composable pour une action ;
-
-• un composable pour une information secondaire.
-
-Les noms sont donnés à titre indicatif. Vous pouvez choisir vos propres noms, à condition qu’ils
-soient clairs.
+Mise à jour visuelle du premier Devoir : Créer un Profil Développeur. On retrouve les previews des modes Dark et Light ainsi que des styles appliqués sur les différents composants de l'appplication. J'ai entre autre lègérement modifier la structure de certains composants.
 
 ---
 
 ### Temps
 
-Ce devoir est à réalisé en 1h30.
+Ce devoir est à réalisé en 3h.
 
 ---
 
@@ -64,65 +17,51 @@ Ce devoir est à réalisé en 1h30.
 un dépôt Git public
 
 Le dépôt doit contenir :
-1. Le projet Android complet.
-2. Un fichier README.md.
-3. Le code Compose de votre fiche « Profil développeur ».
-4. Au moins deux previews fonctionnelles.
-5. Une courte réponse écrite dans le README.md.
-
----
-
-## Titre : Profil développeur Compose
-
-### Description
-
-
-
----
-
-### Notions utilisées
-
-
+• le projet Android complet ;
+• un fichier README.md ;
+• au moins une capture d’écran ;
+• au moins deux previews ;
+• le lien du dépôt déposé dans le devoir Teams.
 
 ---
 
 ### Explications
 
-1. Quels composables avez-vous créés ?
+1. Quels composants compose avez-vous utilisés ?
 
-- ProfileCard
-- ProfileHeader
-- ProfileName
-- ProfileTitle
-- ProfileSkills
-- ProfileButtonContact
-- ProfileContent
-- DeveloperFullstackPreview
-- DeveloperFrontPreview
+- Column
+- Text
+- Image
+- Box
+- Button
 
-2. Quel composable représente l’écran principal ?
+2. Liste des layout utilisés
 
-- ProfileCard
+- padding
+- fillMaxWidth
+- MaterialTheme
+- Alignment
+- align
 
-3. Où utilisez-vous un padding externe ?
+3. Liste affiché avec LazyColumn ou LazyRow ?
 
-- ProfileCard
+- Je n'est pas eu le temps de modifier la structure en utilisant LazyColumn ou LazyRow
 
-4. Où utilisez-vous un padding interne ?
+4. Le choix du theme
 
-- ProfileContent
+- Dark theme
+- Light theme
+- Couleurs -> Teintes de orange
 
-5. Quel composant reçoit un callback ?
+5. Quelles notions du chapitre Compose UI avez-vous
+   réutilisées dans cette application ?
 
-- ProfileButtonContact
-
-6. Quelle information d’accessibilité avez-vous ajoutée ?
-
-- un role est une description
-
-7. Pourquoi vos composants peuvent-ils être considérés comme réutilisables ?
-
-- grace aux paramètre transmit des enfant vers le parent
+- Colorscheme
+- Typography
+- Materialyou
+- dark theme
+- light theme
+- List<>
 
 ---
 
