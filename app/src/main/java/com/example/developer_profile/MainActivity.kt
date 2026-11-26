@@ -5,6 +5,7 @@ import android.widget.Button
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -18,8 +19,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -99,8 +102,15 @@ fun ProfileCard(
         modifier = modifier
     ) {
         Column(
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            ProfilImage(
+                profilTitle = profil.title,
+                modifier = modifier.fillMaxWidth().padding(bottom = 16.dp)
+            )
             ProfileHeader(
                 name = profil.name,
                 title = profil.title
@@ -114,6 +124,15 @@ fun ProfileCard(
             )
         }
     }
+}
+
+@Composable
+fun ProfilImage(profilTitle: String, modifier: Modifier = Modifier) {
+    Image(
+        painter = painterResource(id = android.R.drawable.ic_menu_gallery),
+        contentDescription = "Image du produit $profilTitle",
+        modifier = modifier
+    )
 }
 
 @Composable
@@ -165,12 +184,13 @@ fun ProfileContent(
 ) {
     Column(
         modifier = modifier
-            .padding(top = 30.dp)
+            .padding(top = 30.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-//        ProfileSkillTitle(
-//            skillTitle = skillTitle,
-//            modifier = Modifier.padding(bottom = 0.dp)
-//        )
+        Text(
+            text = "Mes compétences :",
+            modifier = Modifier.padding(bottom = 10.dp)
+        )
 
         ProfileSkills(
             skills = skills,
@@ -204,23 +224,13 @@ fun ProfileContent(
 }
 
 @Composable
-fun ProfileSkillTitle(
-    skillTitle: String,
-    modifier: Modifier = Modifier
-) {
-    Text(
-        text = skillTitle,
-        modifier = modifier
-    )
-}
-
-@Composable
 fun ProfileSkills(
     skills: List<String>,
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier
+        modifier = modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         skills.forEach { skill ->
             Text(text = skill)
