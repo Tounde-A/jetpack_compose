@@ -22,6 +22,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.foundation.background
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
@@ -104,12 +106,13 @@ fun ProfileCard(
         Column(
             modifier = Modifier
                 .padding(16.dp)
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.background),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             ProfilImage(
                 profilTitle = profil.title,
-                modifier = modifier.fillMaxWidth().padding(bottom = 16.dp)
+                modifier = modifier.fillMaxWidth().padding(bottom = 16.dp).padding(top = 16.dp)
             )
             ProfileHeader(
                 name = profil.name,
@@ -120,7 +123,8 @@ fun ProfileCard(
                 skills = profil.skills,
                 description = profil.description,
                 onContactClick = onContactClick,
-                buttonText = buttonText
+                buttonText = buttonText,
+                modifier = modifier.padding(bottom = 16.dp)
             )
         }
     }
@@ -158,6 +162,8 @@ fun ProfileName(
 ) {
     Text(
         text = name,
+        style = MaterialTheme.typography.headlineMedium,
+        color = MaterialTheme.colorScheme.primary,
         modifier = modifier
     )
 }
@@ -169,13 +175,14 @@ fun ProfileTitle(
 ) {
     Text(
         text = title,
+        style = MaterialTheme.typography.titleSmall,
+        color = MaterialTheme.colorScheme.secondary,
         modifier = modifier
     )
 }
 
 @Composable
 fun ProfileContent(
-    //skillTitle: String,
     skills: List<String>,
     description: String,
     onContactClick: () -> Unit,
@@ -189,7 +196,10 @@ fun ProfileContent(
     ) {
         Text(
             text = "Mes compétences :",
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.tertiary,
             modifier = Modifier.padding(bottom = 10.dp)
+
         )
 
         ProfileSkills(
@@ -199,11 +209,15 @@ fun ProfileContent(
 
         ProfileSecondaryInformation(
             description = description,
-            modifier = Modifier.padding(top = 30.dp)
+            modifier = Modifier
+                .padding(top = 30.dp)
+                .padding(horizontal = 20.dp)
         )
 
         Box(
-            modifier = modifier.padding(top = 30.dp)
+            modifier = Modifier
+                .padding(top = 10.dp)
+                .align(Alignment.CenterHorizontally)
         ) {
             ProfileButtonContact(
                 onContactClick = {
@@ -233,7 +247,11 @@ fun ProfileSkills(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         skills.forEach { skill ->
-            Text(text = skill)
+            Text(
+                text = skill,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.tertiary,
+            )
         }
     }
 }
@@ -245,7 +263,8 @@ fun ProfileButtonContact(
     modifier: Modifier = Modifier
 ) {
     Button(
-        onClick = onContactClick
+        onClick = onContactClick,
+        modifier = modifier
     ) {
         Text(
             text = buttonText,
@@ -261,6 +280,8 @@ fun ProfileSecondaryInformation(
 ) {
     Text(
         text = description,
+        style = MaterialTheme.typography.bodySmall,
+        color = MaterialTheme.colorScheme.primary,
         modifier = modifier
     )
 }
@@ -284,6 +305,42 @@ fun DeveloperFullstackPreview() {
 @Composable
 fun DeveloperFrontPreview() {
     Developer_profileTheme {
+        ProfileCard(
+            profil = DeveloperFontProfil(),
+            onContactClick = {},
+            buttonText = "Voir mon portfolio",
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(4.dp)
+        )
+    }
+}
+
+@Preview(
+    showBackground = true,
+    name = "Profil - Dark Theme"
+)
+@Composable
+fun ProfilScreenDarkPreview() {
+    Developer_profileTheme(darkTheme = true) {
+        ProfileCard(
+            profil = DeveloperFullStackProfil(),
+            onContactClick = {},
+            buttonText = "Me contacter",
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(4.dp)
+        )
+    }
+}
+
+@Preview(
+    showBackground = true,
+    name = "Profil - Light Theme"
+)
+@Composable
+fun ProfilScreenLightPreview() {
+    Developer_profileTheme(darkTheme = false) {
         ProfileCard(
             profil = DeveloperFontProfil(),
             onContactClick = {},
