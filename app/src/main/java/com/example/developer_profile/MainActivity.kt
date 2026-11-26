@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -43,6 +44,34 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+data class ProfilUi(
+    val id: Int,
+    val name: String,
+    val title: String,
+    val skills: List<String>,
+    val description: String
+)
+
+fun DeveloperFullStackProfil(): ProfilUi {
+    return ProfilUi(
+        id = 1,
+        name = "Stan Lebaron",
+        title = "Developpeur Full Stack",
+        skills = listOf("PHP", "Laravel", "Python", "Django", "Java", "Spring Boot", "API REST", "SQL", "MySQL / PostgreSQL", "Architecture MVC", "Authentification et autorisation"),
+        description = "Je travail pour la société X."
+    )
+}
+
+fun DeveloperFontProfil(): ProfilUi {
+    return ProfilUi(
+        id = 2,
+        name = "Jesse Faden",
+        title = "Developpeuse Front end",
+        skills = listOf("HTML5", "CSS3", "JavaScript", "TypeScript", "React.js", "Next.js", "Responsive Design", "SQL", "Tests Front-End", "UI/UX Design"),
+        description = "Je créer des interfaces visuelles pour des jeux vidéo."
+    )
+}
+
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
@@ -61,11 +90,7 @@ fun GreetingPreview() {
 
 @Composable
 fun ProfileCard(
-    name: String,
-    title: String,
-    skillTitle: String,
-    skills: String,
-    info: String,
+    profil: ProfilUi,
     onContactClick: () -> Unit,
     buttonText: String,
     modifier: Modifier = Modifier
@@ -77,13 +102,13 @@ fun ProfileCard(
             modifier = Modifier.padding(16.dp)
         ) {
             ProfileHeader(
-                name = name,
-                title = title
+                name = profil.name,
+                title = profil.title
             )
             ProfileContent(
-                skillTitle = skillTitle,
-                skills = skills,
-                info = info,
+                // skillTitle = skillTitle,
+                skills = profil.skills,
+                description = profil.description,
                 onContactClick = onContactClick,
                 buttonText = buttonText
             )
@@ -131,9 +156,9 @@ fun ProfileTitle(
 
 @Composable
 fun ProfileContent(
-    skillTitle: String,
-    skills: String,
-    info: String,
+    //skillTitle: String,
+    skills: List<String>,
+    description: String,
     onContactClick: () -> Unit,
     buttonText: String,
     modifier: Modifier = Modifier
@@ -142,10 +167,10 @@ fun ProfileContent(
         modifier = modifier
             .padding(top = 30.dp)
     ) {
-        ProfileSkillTitle(
-            skillTitle = skillTitle,
-            modifier = Modifier.padding(bottom = 0.dp)
-        )
+//        ProfileSkillTitle(
+//            skillTitle = skillTitle,
+//            modifier = Modifier.padding(bottom = 0.dp)
+//        )
 
         ProfileSkills(
             skills = skills,
@@ -153,7 +178,7 @@ fun ProfileContent(
         )
 
         ProfileSecondaryInformation(
-            info = info,
+            description = description,
             modifier = Modifier.padding(top = 30.dp)
         )
 
@@ -191,13 +216,16 @@ fun ProfileSkillTitle(
 
 @Composable
 fun ProfileSkills(
-    skills: String,
+    skills: List<String>,
     modifier: Modifier = Modifier
 ) {
-    Text(
-        text = skills,
+    Column(
         modifier = modifier
-    )
+    ) {
+        skills.forEach { skill ->
+            Text(text = skill)
+        }
+    }
 }
 
 @Composable
@@ -218,11 +246,11 @@ fun ProfileButtonContact(
 
 @Composable
 fun ProfileSecondaryInformation(
-    info: String,
+    description: String,
     modifier: Modifier = Modifier
 ) {
     Text(
-        text = info,
+        text = description,
         modifier = modifier
     )
 }
