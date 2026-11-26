@@ -260,24 +260,7 @@ fun ProfileSecondaryInformation(
 fun DeveloperFullstackPreview() {
     Developer_profileTheme {
         ProfileCard(
-            name = "Stan Lebaron",
-            title = "Developpeur Full Stack",
-            skillTitle = "Compétences :",
-            skills = "PHP\n" +
-                    "Laravel\n" +
-                    "Python\n" +
-                    "Django\n" +
-                    "Java\n" +
-                    "Spring Boot\n" +
-                    "API REST\n" +
-                    "SQL\n" +
-                    "MySQL / PostgreSQL\n" +
-                    "Architecture MVC\n" +
-                    "Authentification et autorisation\n" +
-                    "Git / GitLab\n" +
-                    "Docker\n" +
-                    "CI/CD",
-            info = "Je travail pour la société X.",
+            profil = DeveloperFullStackProfil(),
             onContactClick = {},
             buttonText = "Me contacter",
             modifier = Modifier
@@ -292,19 +275,7 @@ fun DeveloperFullstackPreview() {
 fun DeveloperFrontPreview() {
     Developer_profileTheme {
         ProfileCard(
-            name = "Jesse Faden",
-            title = "Developpeuse Frontend",
-            skillTitle = "Compétences :",
-            skills = "HTML5\n" +
-                    "CSS3\n" +
-                    "JavaScript\n" +
-                    "TypeScript\n" +
-                    "React.js\n" +
-                    "Next.js\n" +
-                    "Responsive Design\n" +
-                    "Tests Front-End\n" +
-                    "UI/UX Design",
-            info = "Je créer des interfaces visuelles pour des jeux vidéo.",
+            profil = DeveloperFontProfil(),
             onContactClick = {},
             buttonText = "Voir mon portfolio",
             modifier = Modifier
