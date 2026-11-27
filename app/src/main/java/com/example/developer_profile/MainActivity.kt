@@ -31,7 +31,11 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
 import com.example.developer_profile.ui.theme.Developer_profileTheme
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +52,19 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+}
+
+class ProfileViewModel : ViewModel() {
+
+    private val allProjects: List<ProjectUi> = sampleProjects()
+
+    private val _uiState = MutableStateFlow(
+        ProjectCatalogUiState(
+            projects = allProjects
+        )
+    )
+
+    val uiState: StateFlow<ProjectCatalogUiState> = _uiState.asStateFlow()
 }
 
 data class ProfilUi(
