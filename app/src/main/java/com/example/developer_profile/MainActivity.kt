@@ -36,6 +36,7 @@ import com.example.developer_profile.ui.theme.Developer_profileTheme
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,6 +76,31 @@ class ProfileViewModel : ViewModel() {
                         project.subject.contains(searchQuery, ignoreCase = true)
 
             matchesSearch
+        }
+    }
+
+    fun onSearchQueryChange(newValue: String) {
+        _uiState.update { currentState ->
+            currentState.copy(
+                searchQuery = newValue,
+                projects = filterProjects(
+                    searchQuery = newValue
+                )
+            )
+        }
+    }
+
+    fun onFavoriteClick(projectId: Int) {
+        _uiState.update { currentState ->
+            val newFavoriteIds =
+                if (currentState.favoriteProductIds.contains(projectId)) {
+                    currentState.favoriteProductIds - projectId
+                } else {
+                    currentState.favoriteProductIds + projectId
+                }
+            currentState.copy(
+                favoriteProductIds = newFavoriteIds
+            )
         }
     }
 }
