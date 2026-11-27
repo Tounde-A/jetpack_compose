@@ -83,6 +83,12 @@ data class ProjectUi(
     val category: String
 )
 
+data class ProjectCatalogUiState(
+    val projects: List<ProjectUi> = emptyList(),
+    val searchQuery: String = "",
+    val favoriteProductIds: List<Int> = emptyList()
+)
+
 fun DeveloperFullStackProfil(): ProfilUi {
     return ProfilUi(
         id = 1,
