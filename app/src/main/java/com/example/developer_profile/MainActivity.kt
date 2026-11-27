@@ -242,6 +242,7 @@ fun GreetingPreview() {
     }
 }
 
+// Composants princiales //
 @Composable
 fun ProfileCard(
     profil: ProfilUi,
@@ -278,7 +279,6 @@ fun ProfileCard(
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.secondary
                 )
-                // Barre de recherche
 
                 Box(
                     modifier = Modifier
@@ -304,6 +304,40 @@ fun ProfileCard(
     }
 }
 
+@Composable
+fun ProfileContent(
+    skills: List<String>,
+    description: String,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .padding(top = 30.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "Mes compétences :",
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.tertiary,
+            modifier = Modifier.padding(bottom = 10.dp)
+
+        )
+
+        ProfileSkills(
+            skills = skills,
+            modifier = Modifier.padding(0.dp)
+        )
+
+        ProfileSecondaryInformation(
+            description = description,
+            modifier = Modifier
+                .padding(top = 30.dp)
+                .padding(horizontal = 20.dp)
+        )
+    }
+}
+
+// Sous-composants //
 @Composable
 fun ProfilImage(profilTitle: String, modifier: Modifier = Modifier) {
     Image(
@@ -356,39 +390,6 @@ fun ProfileTitle(
 }
 
 @Composable
-fun ProfileContent(
-    skills: List<String>,
-    description: String,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        modifier = modifier
-            .padding(top = 30.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = "Mes compétences :",
-            style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.tertiary,
-            modifier = Modifier.padding(bottom = 10.dp)
-
-        )
-
-        ProfileSkills(
-            skills = skills,
-            modifier = Modifier.padding(0.dp)
-        )
-
-        ProfileSecondaryInformation(
-            description = description,
-            modifier = Modifier
-                .padding(top = 30.dp)
-                .padding(horizontal = 20.dp)
-        )
-    }
-}
-
-@Composable
 fun ProfileSkills(
     skills: List<String>,
     modifier: Modifier = Modifier
@@ -437,6 +438,7 @@ fun ProfileSecondaryInformation(
     )
 }
 
+// Composants Preview //
 @Preview(showBackground = true)
 @Composable
 fun DeveloperFullstackPreview() {
