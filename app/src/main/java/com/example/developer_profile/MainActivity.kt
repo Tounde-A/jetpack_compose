@@ -23,6 +23,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.res.painterResource
@@ -105,6 +109,7 @@ class ProfileViewModel : ViewModel() {
     }
 }
 
+// Data
 data class ProfilUi(
     val id: Int,
     val name: String,
@@ -282,7 +287,7 @@ fun ProfileCard(
 
                 Box(
                     modifier = Modifier
-                        .padding(top = 10.dp)
+                        .padding(top = 10.dp, bottom = 20.dp)
                 ) {
                     ProfileButtonContact(
                         onContactClick = {
@@ -302,6 +307,22 @@ fun ProfileCard(
             }
         }
     }
+}
+
+@Composable
+fun ProfileHeader(
+    name: String,
+    title: String,
+    modifier: Modifier = Modifier
+) {
+    ProfileName(
+        name = name,
+        modifier = modifier
+    )
+    ProfileTitle(
+        title = title,
+        modifier = modifier
+    )
 }
 
 @Composable
@@ -343,22 +364,6 @@ fun ProfilImage(profilTitle: String, modifier: Modifier = Modifier) {
     Image(
         painter = painterResource(id = android.R.drawable.ic_menu_gallery),
         contentDescription = "Image du produit $profilTitle",
-        modifier = modifier
-    )
-}
-
-@Composable
-fun ProfileHeader(
-    name: String,
-    title: String,
-    modifier: Modifier = Modifier
-) {
-    ProfileName(
-        name = name,
-        modifier = modifier
-    )
-    ProfileTitle(
-        title = title,
         modifier = modifier
     )
 }
@@ -409,6 +414,19 @@ fun ProfileSkills(
 }
 
 @Composable
+fun ProfileSecondaryInformation(
+    description: String,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        text = description,
+        style = MaterialTheme.typography.bodySmall,
+        color = MaterialTheme.colorScheme.primary,
+        modifier = modifier
+    )
+}
+
+@Composable
 fun ProfileButtonContact(
     onContactClick: () -> Unit,
     buttonText: String,
@@ -426,16 +444,59 @@ fun ProfileButtonContact(
 }
 
 @Composable
-fun ProfileSecondaryInformation(
-    description: String,
+fun ProjectListItem(
+    project: ProjectUi,
+    isFavorite: Boolean,
+    onFavoriteClick: () -> Unit,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Text(
-        text = description,
-        style = MaterialTheme.typography.bodySmall,
-        color = MaterialTheme.colorScheme.primary,
-        modifier = modifier
-    )
+    Card(
+        modifier = modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 3.dp
+        )
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text(
+                text = project.title,
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+            Text(
+                text = project.client,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.tertiary
+            )
+            Text(
+                text = project.category,
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.primary
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(
+                text = project.subject,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.secondary
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Button(onClick = onClick) {
+                Text(text = "Voir le projets")
+            }
+            Button(onClick = onFavoriteClick) {
+                Text(
+                    text = if (isFavorite) {
+                        "Retirer des favoris"
+                    } else {
+                        "Ajouter aux favoris"
+                    }
+                )
+            }
+        }
+    }
 }
 
 // Composants Preview //
