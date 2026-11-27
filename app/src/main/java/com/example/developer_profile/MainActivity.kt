@@ -54,8 +54,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             Developer_profileTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
+                    ProfileContainer(
+                        onProjectClick = {
+                            //
+                        },
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -253,22 +255,6 @@ fun sampleProjects(): List<ProjectUi> {
     )
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Developer_profileTheme {
-        Greeting("Android")
-    }
-}
-
 // Composants princiales //
 @Composable
 fun ProfileContainer(
@@ -290,7 +276,7 @@ fun ProfileContainer(
         onProjectClick = onProjectClick,
         onContactClick = {},
         buttonText = "Voir mon portfolio",
-        modifier = Modifier.fillMaxWidth().padding(4.dp)
+        modifier = modifier.fillMaxWidth().padding(4.dp)
     )
 }
 
@@ -612,11 +598,17 @@ fun DeveloperFullstackPreview() {
     Developer_profileTheme {
         ProfileCard(
             profil = DeveloperFullStackProfil(),
+            projects = sampleProjects(),
+            searchQuery = "",
+            onSearchQueryChange = {},
+            showOnlyFavorite = true,
+            onToggleFavoriteFilter = {},
+            favoriteProjectIds = listOf(1),
+            onFavoriteClick = {},
+            onProjectClick = {},
             onContactClick = {},
             buttonText = "Me contacter",
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(4.dp)
+            modifier = Modifier.fillMaxWidth().padding(4.dp)
         )
     }
 }
@@ -627,47 +619,107 @@ fun DeveloperFrontPreview() {
     Developer_profileTheme {
         ProfileCard(
             profil = DeveloperFontProfil(),
+            projects = sampleProjects(),
+            searchQuery = "",
+            onSearchQueryChange = {},
+            showOnlyFavorite = false,
+            onToggleFavoriteFilter = {},
+            favoriteProjectIds = listOf(1),
+            onFavoriteClick = {},
+            onProjectClick = {},
             onContactClick = {},
             buttonText = "Voir mon portfolio",
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(4.dp)
+            modifier = Modifier.fillMaxWidth().padding(4.dp)
         )
     }
 }
 
 @Preview(
     showBackground = true,
-    name = "Profil - Dark Theme"
+    name = "Profil Fullstack - Dark Theme"
 )
 @Composable
-fun ProfilScreenDarkPreview() {
+fun ProfileFullstackScreenDarkPreview() {
     Developer_profileTheme(darkTheme = true) {
         ProfileCard(
             profil = DeveloperFullStackProfil(),
+            projects = sampleProjects(),
+            searchQuery = "",
+            onSearchQueryChange = {},
+            showOnlyFavorite = true,
+            onToggleFavoriteFilter = {},
+            favoriteProjectIds = listOf(1),
+            onFavoriteClick = {},
+            onProjectClick = {},
             onContactClick = {},
             buttonText = "Me contacter",
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(4.dp)
+            modifier = Modifier.fillMaxWidth().padding(4.dp)
         )
     }
 }
 
 @Preview(
     showBackground = true,
-    name = "Profil - Light Theme"
+    name = "Profil Front - Dark Theme"
 )
 @Composable
-fun ProfilScreenLightPreview() {
-    Developer_profileTheme(darkTheme = false) {
+fun ProfileFrontScreenDarkPreview() {
+    Developer_profileTheme(darkTheme = true) {
         ProfileCard(
             profil = DeveloperFontProfil(),
+            projects = sampleProjects(),
+            searchQuery = "",
+            onSearchQueryChange = {},
+            showOnlyFavorite = false,
+            onToggleFavoriteFilter = {},
+            favoriteProjectIds = listOf(1),
+            onFavoriteClick = {},
+            onProjectClick = {},
             onContactClick = {},
             buttonText = "Voir mon portfolio",
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(4.dp)
+            modifier = Modifier.fillMaxWidth().padding(4.dp)
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ProfileFullstackScreenStatelessPreview() {
+    Developer_profileTheme {
+        ProfileCard(
+            profil = DeveloperFullStackProfil(),
+            projects = sampleProjects(),
+            searchQuery = "",
+            onSearchQueryChange = {},
+            showOnlyFavorite = true,
+            onToggleFavoriteFilter = {},
+            favoriteProjectIds = listOf(1,2,3,4),
+            onFavoriteClick = {},
+            onProjectClick = {},
+            onContactClick = {},
+            buttonText = "Me contacter",
+            modifier = Modifier.fillMaxWidth().padding(4.dp)
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ProfileFrontScreenStatelessPreview() {
+    Developer_profileTheme {
+        ProfileCard(
+            profil = DeveloperFontProfil(),
+            projects = sampleProjects(),
+            searchQuery = "",
+            onSearchQueryChange = {},
+            showOnlyFavorite = false,
+            onToggleFavoriteFilter = {},
+            favoriteProjectIds = listOf(1,2,3,4,5,6),
+            onFavoriteClick = {},
+            onProjectClick = {},
+            onContactClick = {},
+            buttonText = "Voir mon portfolio",
+            modifier = Modifier.fillMaxWidth().padding(4.dp)
         )
     }
 }
