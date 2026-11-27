@@ -30,7 +30,10 @@ Le dépôt doit contenir :
 
 1. États gérés par l'application
 
-- 
+- Texte de recherche (Barre de recherche)
+- Filtre de favoris
+- Projets favoris
+- Liste de projets
 
 2. État local
 
@@ -38,15 +41,15 @@ Le dépôt doit contenir :
 
 3. State Hoisting
 
-- 
+- Mon composant parent ProfileContainer gère les états, tandis que mon composant enfant ProfileCard gère uniquement l'affichage. Il y a une séparation des responsabilitées.
 
 4. ViewModel
 
-- 
+- La viewModel me permet de gérer la logique et les données de mon application.
 
 5. StateFlow
 
-- 
+- L'interface observe les valeurs l'application recompose à chaque changement/modification d'une valeur.
 
 6. Organisation du code
 
