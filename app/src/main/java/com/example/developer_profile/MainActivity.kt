@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.foundation.background
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
@@ -57,6 +58,14 @@ data class ProfilUi(
     val description: String
 )
 
+data class ProjectUi(
+    val id: Int,
+    val title: String,
+    val subject: String,
+    val client: String,
+    val category: String
+)
+
 fun DeveloperFullStackProfil(): ProfilUi {
     return ProfilUi(
         id = 1,
@@ -74,6 +83,85 @@ fun DeveloperFontProfil(): ProfilUi {
         title = "Developpeuse Front end",
         skills = listOf("HTML5", "CSS3", "JavaScript", "TypeScript", "React.js", "Next.js", "Responsive Design", "SQL", "Tests Front-End", "UI/UX Design"),
         description = "Je créer des interfaces visuelles pour des jeux vidéo."
+    )
+}
+
+fun sampleProject(): ProjectUi {
+    return ProjectUi(
+        id = 1,
+        title = "Refonte du site web",
+        subject = "Modernisation de l'interface et amélioration de l'expérience utilisateur",
+        client = "TechNova",
+        category = "Développement web"
+    )
+}
+
+fun sampleProjects(): List<ProjectUi> {
+    return listOf(
+        sampleProject(),
+        ProjectUi(
+            id = 2,
+            title = "Application mobile de fitness",
+            subject = "Suivi des entraînements et des performances sportives",
+            client = "FitLife",
+            category = "Application mobile"
+        ),
+        ProjectUi(
+            id = 3,
+            title = "Gestion des stocks",
+            subject = "Création d'un outil de gestion et de suivi des stocks",
+            client = "LogiPlus",
+            category = "Logiciel métier"
+        ),
+        ProjectUi(
+            id = 4,
+            title = "Plateforme e-commerce",
+            subject = "Développement d'une boutique en ligne avec paiement sécurisé",
+            client = "UrbanShop",
+            category = "E-commerce"
+        ),
+        ProjectUi(
+            id = 5,
+            title = "Application de réservation",
+            subject = "Gestion des réservations et des disponibilités en temps réel",
+            client = "Hotelia",
+            category = "Application web"
+        ),
+        ProjectUi(
+            id = 6,
+            title = "Tableau de bord analytique",
+            subject = "Visualisation des indicateurs de performance et statistiques",
+            client = "DataVision",
+            category = "Data / BI"
+        ),
+        ProjectUi(
+            id = 7,
+            title = "Système de gestion RH",
+            subject = "Centralisation des informations et gestion des congés",
+            client = "PeopleFirst",
+            category = "Logiciel métier"
+        ),
+        ProjectUi(
+            id = 8,
+            title = "Application de livraison",
+            subject = "Suivi des commandes et géolocalisation des livreurs",
+            client = "ExpressGo",
+            category = "Application mobile"
+        ),
+        ProjectUi(
+            id = 9,
+            title = "API de gestion des utilisateurs",
+            subject = "Développement d'une API REST avec authentification sécurisée",
+            client = "CloudSystems",
+            category = "Backend / API"
+        ),
+        ProjectUi(
+            id = 10,
+            title = "Plateforme de formation",
+            subject = "Gestion des cours, des apprenants et des évaluations",
+            client = "LearnUp",
+            category = "Application web"
+        )
     )
 }
 
@@ -103,29 +191,54 @@ fun ProfileCard(
     Surface(
         modifier = modifier
     ) {
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .padding(16.dp)
                 .fillMaxWidth()
                 .background(MaterialTheme.colorScheme.background),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            ProfilImage(
-                profilTitle = profil.title,
-                modifier = modifier.fillMaxWidth().padding(bottom = 16.dp).padding(top = 16.dp)
-            )
-            ProfileHeader(
-                name = profil.name,
-                title = profil.title
-            )
-            ProfileContent(
-                // skillTitle = skillTitle,
-                skills = profil.skills,
-                description = profil.description,
-                onContactClick = onContactClick,
-                buttonText = buttonText,
-                modifier = modifier.padding(bottom = 16.dp)
-            )
+            item {
+                ProfilImage(
+                    profilTitle = profil.title,
+                    modifier = modifier.fillMaxWidth().padding(bottom = 16.dp).padding(top = 16.dp)
+                )
+                ProfileHeader(
+                    name = profil.name,
+                    title = profil.title
+                )
+                ProfileContent(
+                    skills = profil.skills,
+                    description = profil.description,
+                    modifier = modifier.padding(bottom = 16.dp)
+                )
+                Text(
+                    text = "Quelques réalisations :",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.secondary
+                )
+                // Barre de recherche
+
+                Box(
+                    modifier = Modifier
+                        .padding(top = 10.dp)
+                ) {
+                    ProfileButtonContact(
+                        onContactClick = {
+                            //
+                        },
+                        buttonText = buttonText,
+                        modifier = Modifier
+                            .clickable(
+                                role = Role.Button,
+                                onClick = onContactClick
+                            )
+                            .semantics {
+                                contentDescription = "Contactez moi depuis une autre plateforme."
+                            }
+                    )
+                }
+            }
         }
     }
 }
@@ -185,8 +298,6 @@ fun ProfileTitle(
 fun ProfileContent(
     skills: List<String>,
     description: String,
-    onContactClick: () -> Unit,
-    buttonText: String,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -213,27 +324,6 @@ fun ProfileContent(
                 .padding(top = 30.dp)
                 .padding(horizontal = 20.dp)
         )
-
-        Box(
-            modifier = Modifier
-                .padding(top = 10.dp)
-                .align(Alignment.CenterHorizontally)
-        ) {
-            ProfileButtonContact(
-                onContactClick = {
-                    //
-                },
-                buttonText = buttonText,
-                modifier = Modifier
-                    .clickable(
-                        role = Role.Button,
-                        onClick = onContactClick
-                    )
-                    .semantics {
-                        contentDescription = "Contactez moi depuis une autre plateforme."
-                    }
-            )
-        }
     }
 }
 
