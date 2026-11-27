@@ -1,4 +1,4 @@
-# Devoir - CC2 Jetpack Compose : Amélioration UI de l’application « Profil développeur »
+# Devoir - CC3 Jetpack Compose : Rendre l'application « Profil développeur » interactive
 
 ### Description
 
@@ -8,7 +8,7 @@ Mise à jour visuelle du premier Devoir : Créer un Profil Développeur. On retr
 
 ### Temps
 
-Ce devoir est à réalisé en 3h.
+Ce devoir est à réalisé en 4h30.
 
 ---
 
@@ -17,51 +17,40 @@ Ce devoir est à réalisé en 3h.
 un dépôt Git public
 
 Le dépôt doit contenir :
-• le projet Android complet ;
-• un fichier README.md ;
-• au moins une capture d’écran ;
-• au moins deux previews ;
-• le lien du dépôt déposé dans le devoir Teams.
+1. le projet Android complet ;
+2. un fichier README.md ;
+3. le code du ViewModel ;
+4. la classe représentant l'état UI ;
+5. au moins deux previews fonctionnelles ;
+6. au moins une capture d'écran de l'application.
 
 ---
 
 ### Explications
 
-1. Quels composants compose avez-vous utilisés ?
+1. États gérés par l'application
 
-- Column
-- Text
-- Image
-- Box
-- Button
+- 
 
-2. Liste des layout utilisés
+2. État local
 
-- padding
-- fillMaxWidth
-- MaterialTheme
-- Alignment
-- align
+- 
 
-3. Liste affiché avec LazyColumn ou LazyRow ?
+3. State Hoisting
 
-- Je n'est pas eu le temps de modifier la structure en utilisant LazyColumn ou LazyRow
+- 
 
-4. Le choix du theme
+4. ViewModel
 
-- Dark theme
-- Light theme
-- Couleurs -> Teintes de orange
+- 
 
-5. Quelles notions du chapitre Compose UI avez-vous
-   réutilisées dans cette application ?
+5. StateFlow
 
-- Colorscheme
-- Typography
-- Materialyou
-- dark theme
-- light theme
-- List<>
+- 
+
+6. Organisation du code
+
+- 
 
 ---
 
