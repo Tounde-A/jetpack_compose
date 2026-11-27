@@ -76,7 +76,7 @@ class ProfileViewModel : ViewModel() {
 
     val uiState: StateFlow<ProjectCatalogUiState> = _uiState.asStateFlow()
 
-    private fun filterProjects(searchQuery: String): List<ProjectUi> {
+    private fun filterProjects(searchQuery: String, showOnlyFavorite: Boolean): List<ProjectUi> {
         return allProjects.filter { project ->
             val matchesSearch =
                 project.title.contains(searchQuery, ignoreCase = true) ||
@@ -84,7 +84,9 @@ class ProfileViewModel : ViewModel() {
                         project.client.contains(searchQuery, ignoreCase = true) ||
                         project.subject.contains(searchQuery, ignoreCase = true)
 
-            matchesSearch
+            val matchesFavorite = !showOnlyFavorite
+
+            matchesSearch && matchesFavorite
         }
     }
 
@@ -93,7 +95,21 @@ class ProfileViewModel : ViewModel() {
             currentState.copy(
                 searchQuery = newValue,
                 projects = filterProjects(
-                    searchQuery = newValue
+                    searchQuery = newValue,
+                    showOnlyFavorite = currentState.showOnlyFavorite
+                )
+            )
+        }
+    }
+
+    fun onToggleFavoriteFilter() {
+        _uiState.update { currentState ->
+            val newShowFavorite = !currentState.showOnlyFavorite
+            currentState.copy(
+                showOnlyFavorite = newShowFavorite,
+                projects = filterProjects(
+                    searchQuery = currentState.searchQuery,
+                    showOnlyFavorite = newShowFavorite
                 )
             )
         }
@@ -134,6 +150,7 @@ data class ProjectUi(
 data class ProjectCatalogUiState(
     val projects: List<ProjectUi> = emptyList(),
     val searchQuery: String = "",
+    val showOnlyFavorite: Boolean = false,
     val favoriteProjectIds: List<Int> = emptyList()
 )
 
