@@ -283,6 +283,8 @@ fun ProfileContainer(
         projects = uiState.projects,
         searchQuery = uiState.searchQuery,
         onSearchQueryChange = viewModel::onSearchQueryChange,
+        showOnlyFavorite = uiState.showOnlyFavorite,
+        onToggleFavoriteFilter = viewModel::onToggleFavoriteFilter,
         favoriteProjectIds = uiState.favoriteProjectIds,
         onFavoriteClick = viewModel::onFavoriteClick,
         onProjectClick = onProjectClick,
@@ -298,6 +300,8 @@ fun ProfileCard(
     projects: List<ProjectUi>,
     searchQuery: String,
     onSearchQueryChange: (String) -> Unit,
+    showOnlyFavorite: Boolean,
+    onToggleFavoriteFilter: () -> Unit,
     favoriteProjectIds: List<Int>,
     onFavoriteClick: (Int) -> Unit,
     onProjectClick: (ProjectUi) -> Unit,
@@ -350,6 +354,19 @@ fun ProfileCard(
                     },
                     modifier = Modifier.fillMaxWidth()
                 )
+            }
+            item {
+                Button(
+                    onClick = onToggleFavoriteFilter
+                ) {
+                    Text(
+                        text = if (showOnlyFavorite) {
+                            "Afficher tous les projets"
+                        } else {
+                            "Afficher uniquement les projets en favoris"
+                        }
+                    )
+                }
             }
             item {
                 Text(
