@@ -53,7 +53,11 @@ Le dépôt doit contenir :
 
 6. Organisation du code
 
-- 
+- ProfileViewModel : Gère la logique métier et les données.
+- ProfileUiState : Gére les états.
+- ProfileContainer : Regroupe la logique métier et la gestion des états.
+- ProfileScreen : Affiche un profile.
+- ProjectCard : Affiche la Carte d'un projet.
 
 ---
 
