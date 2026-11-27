@@ -25,10 +25,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
@@ -36,6 +40,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.developer_profile.ui.theme.Developer_profileTheme
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -97,13 +102,13 @@ class ProfileViewModel : ViewModel() {
     fun onFavoriteClick(projectId: Int) {
         _uiState.update { currentState ->
             val newFavoriteIds =
-                if (currentState.favoriteProductIds.contains(projectId)) {
-                    currentState.favoriteProductIds - projectId
+                if (currentState.favoriteProjectIds.contains(projectId)) {
+                    currentState.favoriteProjectIds - projectId
                 } else {
-                    currentState.favoriteProductIds + projectId
+                    currentState.favoriteProjectIds + projectId
                 }
             currentState.copy(
-                favoriteProductIds = newFavoriteIds
+                favoriteProjectIds = newFavoriteIds
             )
         }
     }
@@ -129,7 +134,7 @@ data class ProjectUi(
 data class ProjectCatalogUiState(
     val projects: List<ProjectUi> = emptyList(),
     val searchQuery: String = "",
-    val favoriteProductIds: List<Int> = emptyList()
+    val favoriteProjectIds: List<Int> = emptyList()
 )
 
 fun DeveloperFullStackProfil(): ProfilUi {
@@ -249,8 +254,36 @@ fun GreetingPreview() {
 
 // Composants princiales //
 @Composable
+fun ProfileContainer(
+    onProjectClick: (ProjectUi) -> Unit,
+    modifier: Modifier = Modifier,
+    viewModel: ProfileViewModel = viewModel()
+) {
+    val uiState by viewModel.uiState.collectAsState()
+
+    ProfileCard(
+        profil = DeveloperFontProfil(),
+        projects = uiState.projects,
+        searchQuery = uiState.searchQuery,
+        onSearchQueryChange = viewModel::onSearchQueryChange,
+        favoriteProjectIds = uiState.favoriteProjectIds,
+        onFavoriteClick = viewModel::onFavoriteClick,
+        onProjectClick = onProjectClick,
+        onContactClick = {},
+        buttonText = "Voir mon portfolio",
+        modifier = Modifier.fillMaxWidth().padding(4.dp)
+    )
+}
+
+@Composable
 fun ProfileCard(
     profil: ProfilUi,
+    projects: List<ProjectUi>,
+    searchQuery: String,
+    onSearchQueryChange: (String) -> Unit,
+    favoriteProjectIds: List<Int>,
+    onFavoriteClick: (Int) -> Unit,
+    onProjectClick: (ProjectUi) -> Unit,
     onContactClick: () -> Unit,
     buttonText: String,
     modifier: Modifier = Modifier
@@ -270,21 +303,60 @@ fun ProfileCard(
                     profilTitle = profil.title,
                     modifier = modifier.fillMaxWidth().padding(bottom = 16.dp).padding(top = 16.dp)
                 )
+            }
+            item {
                 ProfileHeader(
                     name = profil.name,
                     title = profil.title
                 )
+            }
+            item {
                 ProfileContent(
                     skills = profil.skills,
                     description = profil.description,
                     modifier = modifier.padding(bottom = 16.dp)
                 )
+            }
+            item {
                 Text(
                     text = "Quelques réalisations :",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.secondary
                 )
-
+            }
+            item {
+                OutlinedTextField(
+                    value = searchQuery,
+                    onValueChange = onSearchQueryChange,
+                    label = {
+                        Text(text = "Rechercher un projet")
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+            item {
+                Text(
+                    text = "${projects.size} projet(s) affiché(s)",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
+            items(
+                items = projects,
+                key =  { project -> project.id }
+            ) {
+                project ->
+                ProjectListItem(
+                    project = project,
+                    isFavorite = favoriteProjectIds.contains(project.id),
+                    onFavoriteClick = {
+                        onFavoriteClick(project.id)
+                    },
+                    onClick = {
+                        onProjectClick(project)
+                    }
+                )
+            }
+            item {
                 Box(
                     modifier = Modifier
                         .padding(top = 10.dp, bottom = 20.dp)
