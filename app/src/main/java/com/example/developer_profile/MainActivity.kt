@@ -65,6 +65,18 @@ class ProfileViewModel : ViewModel() {
     )
 
     val uiState: StateFlow<ProjectCatalogUiState> = _uiState.asStateFlow()
+
+    private fun filterProjects(searchQuery: String): List<ProjectUi> {
+        return allProjects.filter { project ->
+            val matchesSearch =
+                project.title.contains(searchQuery, ignoreCase = true) ||
+                        project.category.contains(searchQuery, ignoreCase = true) ||
+                        project.client.contains(searchQuery, ignoreCase = true) ||
+                        project.subject.contains(searchQuery, ignoreCase = true)
+
+            matchesSearch
+        }
+    }
 }
 
 data class ProfilUi(
